@@ -1,5 +1,11 @@
 {% extends 'social/base.html' %} {% block content %}
 
-
 <h3>signup here</h3>
+<form method="POST" action>
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <input type="submit" name="Create User">
+</form>
+
 {% endblock %}
