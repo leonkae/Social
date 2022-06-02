@@ -13,8 +13,7 @@ class Profile(models.Models):
    
     def __str__(self):
        return self.name
-    
-
+   
 class Post(models.Model):
      '''image(post) model'''
      image = models.ImageField(upload_to='media/',default='')
@@ -24,10 +23,25 @@ class Post(models.Model):
      created = models.DateTimeField(auto_now_add=True)
      modified =models.DateTimeField(auto_now_add=True)
      profile =models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
-     
+     likes = models.ManyToManyField(User, related_name='likes', blank=True)
+   
+     def __str__(self):
+        return f'{self.user.name} Post'
 
 class Comment(models.Model):
     post =models.ForeignKey(Post, on_delete=models.CASCADE) 
-    comments = models.TextField(max_length=100) 
+    comment = models.TextField(max_length=100) 
     created = models.DateTimeField(auto_now_add=True)
-    modified =models.DateTimeField(auto_now_add=True)
+    modified =models.DateTimeField(auto_now_add=True) 
+    
+    def __str__(self):
+        return f'{self.user.name} Post'
+    
+class Follow(models.Model):
+    follow = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='following') 
+    followers = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='followers')
+       
+
+    def __str__(self):
+         return f'{self.follow} Follow'
+
