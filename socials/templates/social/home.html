@@ -1,0 +1,7 @@
+{% extends 'social/base.html' %} {% block content %}
+
+<h1>this is home</h1> 
+<p>{{request.user}}</p>
+<button><a href="{% url 'logout' %}">logout</a></button>
+
+{% endblock %}

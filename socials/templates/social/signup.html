@@ -17,45 +17,62 @@
 </div>
 
 <div class="container">
-  <h3>Signup here</h3>
+  <h3>SignUp here</h3>
   <form method="POST" action>
     {% csrf_token %}
+
     <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">
-        {{form.username.label}}</label
-      >
-      {{form.username}}
+      <label for="InputUsername" class="form-label">User name</label>
+      <input
+        type="text"
+        class="form-control"
+        name="username"
+        id="InputUsername"
+      />
     </div>
 
     <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      {{form.email}}
-      <div id="emailHelp" class="form-text">
-        We'll never share your email with anyone else.
-      </div>
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">
-        {{form.password1.label}}</label
-      >
-      {{form.password1}}
+      <label for="InputUsername" class="form-label">Email</label>
+      <input
+        type="text"
+        class="form-control"
+        name="email"
+        id="InputUsername"
+      />
     </div>
 
     <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">
-        {{form.password2.label}}</label
-      >
-      {{form.password2}}
+      <label for="InputPassword" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="Password"
+        name="password1"
+      />
     </div>
-    <button type="submit" class="btn btn-primary" name="Create User">
-      Submit
+
+    <div class="mb-3">
+      <label for="InputPassword" class="form-label">Confirm Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="Password"
+        name="password2"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary" name="Login User">
+      login
     </button>
   </form>
 
+  {% for message in messages %}
+  <p id="message">{{message}}</p>
+  {% endfor %}
   <div class="border-top pt-3 mt-2">
     <small class="text-muted">
-      Already have an accont ?
-      <a class="ml-2" href="{% url 'login' %}">login</a>
+      Don't have an accont ?
+      <a class="ml-2" href="{% url 'signup' %}">Sign Up</a>
     </small>
   </div>
 </div>
