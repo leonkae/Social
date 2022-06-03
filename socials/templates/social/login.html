@@ -1,5 +1,55 @@
 {% extends 'social/base.html' %} {% block content %}
 
-<h3>login here</h3>
+<style>
+  .title {
+    margin-top: 100px;
+  }
+  h1 {
+    font-family: "Grand Hotel", cursive;
+    font-size: 70px;
+    color: #264653;
+    text-align: center; 
+  }
+</style>
+
+<div class="title">
+  <h1>Social</h1>
+</div>
+
+<div class="container">
+  <h3>Login here</h3>
+  <form method="POST" action>
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="InputEmail1"
+        aria-describedby="emailHelp"
+      />
+      <div id="emailHelp" class="form-text">
+        We'll never share your email with anyone else.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" id="Password1" />
+    </div>
+
+    <button type="submit" class="btn btn-primary" name="Login User">
+      login
+    </button>
+  </form>
+
+  <div class="border-top pt-3 mt-2">
+    <small class="text-muted">
+      Don't have an accont ?
+      <a class="ml-2" href="{% url 'signup' %}">Sign Up</a>
+    </small>
+  </div>
+</div>
 
 {% endblock %}
