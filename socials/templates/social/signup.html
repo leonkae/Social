@@ -66,9 +66,11 @@
     </button>
   </form>
 
-  {% for message in messages %}
-  <p id="message">{{message}}</p>
-  {% endfor %}
+  <div class="error">
+    <p>{{form.errors}}</p>
+  </div>
+  
+
   <div class="border-top pt-3 mt-2">
     <small class="text-muted">
       Do you have an account ?
