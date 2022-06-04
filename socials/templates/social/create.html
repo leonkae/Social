@@ -1,0 +1,99 @@
+{% extends 'social/base.html' %} {% block content %}
+
+<style>
+  .title {
+    margin-top: 130px;
+  }
+  h1 {
+    font-family: "Grand Hotel", cursive;
+    font-size: 70px;
+    color: #fd6254;
+  }
+  .user-name {
+    font-size: large;
+  }
+  .logout a {
+    text-decoration: none;
+    color: black;
+  }
+  .submit{
+      background:none;
+      border: none;
+  }
+</style>
+
+<a href="{% url 'home' %}"
+  ><svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="feather feather-arrow-left"
+  >
+    <line x1="19" y1="12" x2="5" y2="12"></line>
+    <polyline points="12 19 5 12 12 5"></polyline></svg
+></a>
+
+<div class="title">
+  <h1 style="text-align: center">Social</h1>
+</div>
+
+<div class="container justify-content-center">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="sub-title">Create Social</div>
+      <div class="card">
+
+
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+          <div class="form-group m-4">
+            <label>Caption</label>
+            <input name="caption" type="text" class="form-control" />
+          </div>
+
+          <div class="form-group m-4">
+            <label>Image name</label>
+            <input name="imagename" type="text" class="form-control" />
+          </div>
+
+          <div class="form-group m-4">
+            <label>Uplaoad image</label>
+            <input
+              name="image"
+              type="file"
+              class="form-control-file"
+              id="example"
+            />
+          </div>
+
+          <button type="submit"  class="submit m-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-upload"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

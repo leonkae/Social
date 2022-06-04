@@ -1,44 +1,57 @@
 
+import profile
 from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
 class Profile(models.Model):
     '''profile model'''
-    bio = models.CharField(max_length=255)
-    profilephoto = models.ImageField(upload_to='media/',default ='')
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    follow = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following') 
+    bio = models.TextField(max_length=255)
+    prophoto = models.ImageField(upload_to='profile/',default ='image.jpg')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile')
+    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following') 
     followers = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followers')
    
     def __str__(self):
-       return self.username
+       return self.user.username
    
-class Post(models.Model):
-     '''image(post) model'''
-     image = models.ImageField(upload_to='media/',default='')
-     imagename = models.CharField(max_length=20)
-     caption = models.CharField(max_length=255)
-     user = models.ForeignKey(User, related_name='author', on_delete =models.CASCADE)
-     created = models.DateTimeField(auto_now_add=True)
-     modified =models.DateTimeField(auto_now=True)
-     likes = models.ForeignKey(User, on_delete=models.CASCADE,related_name='likes', blank=True)
-     comments=models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
-     
-     
    
-     def __str__(self):
-        return f'{self.user.username} Post'
-
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete =models.CASCADE)
-    post =models.ForeignKey(Post, on_delete=models.CASCADE) 
-    comment = models.TextField(max_length=100) 
+    text = models.TextField(max_length=100) 
     created = models.DateTimeField(auto_now_add=True)
     modified =models.DateTimeField(auto_now=True) 
     
     def __str__(self):
         return f'{self.user.username} Post'
+    
+class Likes(models.Model): 
+    count= models.IntegerField()   
+    
+    def __str__(self):
+        return self.count   
+   
+class Post(models.Model):
+     '''image(post) model'''
+     
+     image = models.ImageField(upload_to='posts/',default='')
+     imagename = models.CharField(max_length=20)
+     caption = models.TextField(max_length=255)
+     profile = models.ForeignKey(Profile, on_delete =models.CASCADE)
+     created = models.DateTimeField(auto_now_add=True)
+     modified =models.DateTimeField(auto_now=True)
+     likes = models.ManyToManyField('Likes', blank=True)
+     comments=models.ManyToManyField('Comment', blank=True)
+     
+     @classmethod
+     def get_images(cls):
+        images = cls.objects.all()
+        return images
+   
+     def __str__(self):
+        return f'{self.profile.user.username} Post'
+
+
     
 
 

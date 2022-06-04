@@ -1,10 +1,10 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from .models import *
 # Create your views here.
 
 def loginPage(request):
@@ -41,10 +41,41 @@ def signup(request):
         context = {'form':form} 
         return render(request, 'social/signup.html', context)
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def home(request):
-    return render(request, 'social/home.html')
+    images= Post.objects.all()
+    return render(request, 'social/home.html', {'images':images})
+
+
+
+def create_post(request):
+    images = Post.objects.all()
+    current_user = request.user
+    user_profile = get_object_or_404(Profile, user=current_user)
+    
+    if request.method == 'POST':
+        data = request.POST
+        image = request.FILES.get('image')
+        print('data', data)
+        print('image', image)
+        
+        post = Post.objects.create(   
+            caption = data['caption'],
+            imagename = data['imagename'],
+            image =image,
+            profile=user_profile,
+        )
+        post.save()
+        return redirect('home')
+    
+    return render(request, 'social/create.html')
+
 
 def logout_user(request):
     logout(request)
     return redirect('login')
+
+
+
+
+

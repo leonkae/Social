@@ -6,12 +6,16 @@
   h1 {
     font-family: "Grand Hotel", cursive;
     font-size: 70px;
-    color: #ff6f61;
+    color: #fd6254;
   }
   .user-name {
     font-size: large;
   }
   .logout a {
+    text-decoration: none;
+    color: black;
+  }
+  .create a {
     text-decoration: none;
     color: black;
   }
@@ -27,6 +31,7 @@
       style="font-size: 5vh; font-family: 'Grand Hotel', cursive; color: black"
       >Social</a
     >
+
     <!-- navbar toggler -->
     <button
       class="navbar-toggler"
@@ -41,6 +46,7 @@
     <!-- main div  -->
     <div class="collapse navbar-collapse" id="navmenu">
       <div class="collapse navbar-collapse" id="navmenu">
+        <div class="user-name ms-3">{{ request.user }}</div>
         <!-- dropdown menu filter by category -->
 
         <!-- dropdown menu filter by location -->
@@ -69,7 +75,26 @@
           </div>
         </div>
       </form>
-      <div class="user-name me-3">{{ request.user }}</div>
+      <div class="create me-3">
+        <a href="{% url 'create' %}"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-plus-square"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="12" y1="8" x2="12" y2="16"></line>
+            <line x1="8" y1="12" x2="16" y2="12"></line></svg
+        ></a>
+      </div>
+
       <div class="logout">
         <a href="{% url 'logout' %}">
           <svg
@@ -102,7 +127,23 @@
 
   <!-- container wrapper-->
   <div class="container">
-      display images
+    <!-- createpost -->
+    {% for image in images %}
+    <div class="row">
+      <div class="col-md-1">
+        <div class="card" style="width: 32rem">
+          <img src="{{ image.image.url }}" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">{{image.imagename}}</h5>
+            <p class="card-text">
+              {{image.caption}}
+            </p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

@@ -26,3 +26,33 @@
     <a href="{% url 'logout' %}">logout</a>
   </button>
 </div>
+
+
+<!-- neccesary requiremnts -->
+
+image model:
+Image,
+Image Name.,
+Image Caption.,
+Profile Foreign key,
+Likes,
+Comments,
+methods(image)-and tests 
+save_image
+delete_image
+update_caption
+
+profile model:
+Profile Photo
+Bio
+
+methods(profile)-and tests 
+save_profile
+delete_profile
+update_profile
+
+Search Functionality
+image Details
+Auth
+
+
