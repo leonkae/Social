@@ -1,7 +1,77 @@
 {% extends 'social/base.html' %} {% block content %}
 
-<h1>this is home</h1> 
-<p>{{request.user}}</p>
-<button><a href="{% url 'logout' %}">logout</a></button>
+<!-- navbar -->
 
+<nav class="navbar navbar-expand-lg bg-light mb-5 fixed-top">
+  <!-- conatainer -->
+  <div class="container">
+    <a
+      href="{% url 'home'%}"
+      class="navbar-brand"
+      style="font-size: 5vh; font-family: 'Grand Hotel', cursive; color: black"
+      >Social</a
+    >
+
+    <!-- navbar toggler -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navmenu"
+      style="color: black"
+    >
+      <span class="navbar-toggler-icon dark"></span>
+    </button>
+
+    <!-- main div  -->
+    <div class="collapse navbar-collapse" id="navmenu">
+      <div class="collapse navbar-collapse" id="navmenu">
+        <!-- dropdown menu filter by category -->
+        <!-- dropdown menu filter by location -->
+      </div>
+
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a href="#" class="nav-link"></a>
+        </li>
+      </ul>
+
+      <!-- search form functions -->
+      <form class="navbar-form" role="search" action="#">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search..."
+            name="image"
+            style="border-radius: 10px; border: solid 1px black"
+          />
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+              <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<!-- home page content -->
+<style>
+  .title {
+    margin-top: 130px;
+  }
+  h1 {
+    font-family: "Grand Hotel", cursive;
+    font-size: 70px;
+    color: #dfb722;
+  }
+</style>
+
+<div class="con-wrapper-fluid">
+  <div class="title">
+    <h1 style="text-align: center">Social</h1>
+  </div>
+</div>
 {% endblock %}
