@@ -9,8 +9,8 @@ class Profile(models.Model):
     bio = models.TextField(max_length=255)
     prophoto = models.ImageField(upload_to='profile/',default ='image.jpg')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile')
-    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following') 
-    followers = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followers')
+    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following', null=True) 
+    followers = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followers', null=True)
    
     def __str__(self):
        return self.user.username
@@ -23,13 +23,7 @@ class Comment(models.Model):
     modified =models.DateTimeField(auto_now=True) 
     
     def __str__(self):
-        return f'{self.user.username} Post'
-    
-class Likes(models.Model): 
-    count= models.IntegerField()   
-    
-    def __str__(self):
-        return self.count   
+        return f'{self.user.username} Post'  
    
 class Post(models.Model):
      '''image(post) model'''
@@ -40,7 +34,7 @@ class Post(models.Model):
      profile = models.ForeignKey(Profile, on_delete =models.CASCADE)
      created = models.DateTimeField(auto_now_add=True)
      modified =models.DateTimeField(auto_now=True)
-     likes = models.ManyToManyField('Likes', blank=True)
+     likes = models.IntegerField(default=0)
      comments=models.ManyToManyField('Comment', blank=True)
      
      @classmethod

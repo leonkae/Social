@@ -46,7 +46,29 @@ def home(request):
     images= Post.objects.all()
     return render(request, 'social/home.html', {'images':images})
 
+def addprofile(request):
+    images = Post.objects.all()
+    current_user = request.user
+    if request.method == 'POST':
+        data = request.POST
+        prophoto = request.FILES.get('prophoto')
+        print('data',data)
+        print('prophoto',prophoto)
+        
+        pro =Profile.objects.create(
+            bio = data['bio'],
+            prophoto = prophoto,
+            user = current_user
+        )
+        pro.save()
+        return redirect ('home')
+        
+    return render(request, 'social/addprofile.html')
 
+def profile(request):
+    current_user = request.user
+    user_profile = get_object_or_404(Profile, user=current_user)
+    return render(request, 'social/userprofile.html', {'user_profile':user_profile} )
 
 def create_post(request):
     images = Post.objects.all()
@@ -68,7 +90,7 @@ def create_post(request):
         post.save()
         return redirect('home')
     
-    return render(request, 'social/create.html')
+    return render(request, 'social/create.html' )
 
 
 def logout_user(request):
