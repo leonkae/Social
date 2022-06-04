@@ -21,7 +21,7 @@ def loginPage(request):
                 login(request, user)
                 return redirect('home')
             else:
-                messages.info(request,'check username or password')
+                messages.info(request,'Check username or password !')
                 
         return render(request, 'social/login.html')
 
