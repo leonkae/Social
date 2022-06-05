@@ -31,6 +31,10 @@
     text-decoration: none;
     color: black;
   }
+  .info-wrapper{
+    font-weight: bolder;
+    font-size: large;
+  }
 </style>
 
 <!-- navbar -->
@@ -183,13 +187,14 @@
   <div class="container">
     <!-- createpost -->
     {% for image in images %}
-    <div class="row">
-      <div class="card mx-auto m-2 " style="width: 32rem;">
+    
+      <div class="card mx-auto m-4 " style="width: 36rem;">
         <img src="{{ image.image.url }}" class="card-img-top" alt="..." />
         <div class="card-body">
           <h5 class="card-title">{{image.imagename}}</h5>
           <p class="card-text">
-            {{image.profile.user.username}}:{{image.caption}}
+            <span class="info-wrapper">{{image.profile.user.username}}</span>
+            : {{image.caption}}
           </p>
 
           <div class="card-nav">
@@ -210,10 +215,11 @@
                 <circle cx="12" cy="12" r="3"></circle>
               </svg>
             </a>
+
+
           </div>
         </div>
       </div>
-    </div>
     {% endfor %}
   </div>
 </div>
