@@ -1,3 +1,4 @@
+from calendar import c
 from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
@@ -71,6 +72,7 @@ def addprofile(request):
 def profile(request):
     current_user = request.user
     user_profile = get_object_or_404(Profile, user=current_user)
+    # images = Post.objects.all()
     return render(request, 'social/userprofile.html', {'user_profile':user_profile} )
 
 @login_required(login_url='login')

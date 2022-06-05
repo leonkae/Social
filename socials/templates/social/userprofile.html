@@ -1,10 +1,9 @@
 {% extends 'social/base.html' %} {% block content %}
 
-
 <!-- navbar -->
 <style>
   .title {
-    margin-top: 130px;
+    margin-top: 70px;
   }
   h1 {
     font-family: "Grand Hotel", cursive;
@@ -33,6 +32,19 @@
   .profile a {
     text-decoration: none;
     color: black;
+  }
+  .card {
+    margin-top: 10px;
+  }
+  .bio {
+    font-weight: bolder;
+    font-size: x-large;
+  }
+  .card-text {
+    font-size: x-large;
+  }
+  .info-wrapper{
+    text-align: center;
   }
 </style>
 <!-- navbar -->
@@ -173,7 +185,27 @@
     <polyline points="12 19 5 12 12 5"></polyline></svg
 ></a>
 
-<h1>this is your profile {{user_profile.user.username}}</h1>
- <p>{{user_profile.bio}}</p>
- <img src="{{user_profile.prophoto.url}}" alt="">
+<div class="title">
+  <h1 style="text-align: center">Social</h1>
+</div>
+
+<div class="container">
+  <div class="info-wrapper">
+    <p>User Profile</p>
+  </div>
+  
+  <div class="card">
+    <img src="{{user_profile.prophoto.url}}" class="card-img-top" alt="..." />
+    <div class="card-body">
+      <p class="card-text">
+        <span class="bio">Username:</span> {{user_profile.user.username}}
+      </p>
+
+      <p class="card-text">
+        <span class="bio">Bio:</span> {{user_profile.bio}}
+      </p>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
