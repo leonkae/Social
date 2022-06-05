@@ -10,4 +10,6 @@ urlpatterns = [
     path('create/', views.create_post, name='create'),
     path('addprofile/',views.addprofile, name='addprofile'),
     path('userprofile/',views.profile, name='userprofile'),
+    path('photo/<str:pk>/', views.viewPhoto,name='photo'),
+    
 ]

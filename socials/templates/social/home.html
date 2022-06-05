@@ -23,7 +23,11 @@
     text-decoration: none;
     color: black;
   }
-  .profile a{
+  .profile a {
+    text-decoration: none;
+    color: black;
+  }
+  .card-nav a{
     text-decoration: none;
     color: black;
   }
@@ -181,12 +185,32 @@
     {% for image in images %}
     <div class="row">
       <div class="col-md-1">
-        <div class="card" style="width: 32rem">
+        <div class="card m-4" style="width: 32rem">
           <img src="{{ image.image.url }}" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">{{image.imagename}}</h5>
-            <p class="card-text">{{image.profile.user.username}}:{{image.caption}}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <p class="card-text">
+              {{image.profile.user.username}}:{{image.caption}}
+            </p>
+            <div class="card-nav">
+              <a href="{% url 'photo' image.id  %}" class="">
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-eye"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle></svg
+            >
+              </a>
+            </div>
           </div>
         </div>
       </div>

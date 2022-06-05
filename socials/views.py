@@ -41,11 +41,13 @@ def signup(request):
         context = {'form':form} 
         return render(request, 'social/signup.html', context)
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 def home(request):
     images= Post.objects.all()
     return render(request, 'social/home.html', {'images':images})
 
+
+@login_required(login_url='login')
 def addprofile(request):
     images = Post.objects.all()
     current_user = request.user
@@ -65,11 +67,13 @@ def addprofile(request):
         
     return render(request, 'social/addprofile.html')
 
+@login_required(login_url='login')
 def profile(request):
     current_user = request.user
     user_profile = get_object_or_404(Profile, user=current_user)
     return render(request, 'social/userprofile.html', {'user_profile':user_profile} )
 
+@login_required(login_url='login')
 def create_post(request):
     images = Post.objects.all()
     current_user = request.user
@@ -91,6 +95,11 @@ def create_post(request):
         return redirect('home')
     
     return render(request, 'social/create.html' )
+
+def viewPhoto(request,pk):
+    '''for viewing photo'''
+    images = Post.objects.get(id=pk)
+    return render(request,'social/photo.html',{'images':images})
 
 
 def logout_user(request):
