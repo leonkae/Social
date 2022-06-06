@@ -1,11 +1,13 @@
-from calendar import c
+from ast import keyword
 from django.shortcuts import get_object_or_404, render,redirect
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import *
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 # Create your views here.
 
 def loginPage(request):
@@ -46,8 +48,6 @@ def signup(request):
 @login_required(login_url='login')
 def home(request):
     images= Post.objects.order_by("-created").all()
-    
-    # current_user = request.user
     user_profile = get_object_or_404(Profile, user=request.user)
     return render(request, 'social/home.html', {'images':images, 'user_profile':user_profile})
 
@@ -79,10 +79,6 @@ def addprofile(request):
 def profile(request):
     current_user = request.user
     user_profile = get_object_or_404(Profile, user=current_user)
-    # user1 = Profile.objects.get(user__id=request.user.id)
-    # user_posts = Post.objects.filter(profile=user1)
-    # print()
-
     images = Post.objects.order_by("-created").filter(profile__user=request.user)
     print(images)
     return render(request, 'social/userprofile.html', {'user_profile':user_profile, 'images':images} )
@@ -109,6 +105,16 @@ def create_post(request):
         return redirect('home')
     
     return render(request, 'social/create.html' )
+
+def LikeView(request,pk):
+    if request.method =='POST':
+        post = get_object_or_404(Post, id=pk)
+        post.likes.add(request.user)
+        print(post)
+
+        return HttpResponseRedirect(reverse('home'))
+    return redirect('home')
+    
 
 def viewPhoto(request,pk):
     '''for viewing photo'''

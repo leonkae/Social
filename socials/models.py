@@ -34,8 +34,10 @@ class Post(models.Model):
      profile = models.ForeignKey(Profile, on_delete =models.CASCADE)
      created = models.DateTimeField(auto_now_add=True)
      modified =models.DateTimeField(auto_now=True)
-     likes = models.IntegerField(default=0)
+     likes = models.ManyToManyField(User, related_name='social_post')
      comments=models.ManyToManyField('Comment', blank=True)
+     
+   
      
      @classmethod
      def get_images(cls):
@@ -47,7 +49,8 @@ class Post(models.Model):
             images =cls.objects.filter(profile__id__icontains=profile).all()
             return images
             
-   
+          
+         
      def __str__(self):
         return f'{self.profile.user.username} Post'
 

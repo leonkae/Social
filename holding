@@ -118,3 +118,7 @@ content
   {{image.caption}}
   <img src="{{image.image.url }}" alt="">
   {% endfor %}
+
+
+  <!-- important -->
+ 
