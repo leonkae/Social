@@ -31,6 +31,16 @@
     text-decoration: none;
     color: black;
   }
+  .user-name img {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    border: 2px solid dodgerblue;
+  }
+  .user-name{
+    font-family: "Poppins", sans-serif;
+
+  }
 </style>
 
 <!-- navbar -->
@@ -184,12 +194,25 @@
     <!-- createpost -->
     {% for image in images %}
     <div class="row">
-      <div class="card mx-auto m-4 " style="width: 32rem;">
+      <div class="card mx-auto m-4" style="width: 32rem">
+        <div class="user-name">
+          <h4>
+            <img
+              src="{{image.profile.prophoto.url}}"
+              class="card-img-top m-2"
+              alt="..."
+            />| {{image.profile.user.username}}
+          </h4>
+        </div>
+
         <img src="{{ image.image.url }}" class="card-img-top" alt="..." />
         <div class="card-body">
           <h5 class="card-title">{{image.imagename}}</h5>
           <p class="card-text">
-            {{image.profile.user.username}}:{{image.caption}}
+            <span style="font-weight: bolder"
+              >{{image.profile.user.username}}</span
+            >
+            : {{image.caption}}
           </p>
 
           <div class="card-nav">
@@ -215,7 +238,6 @@
       </div>
     </div>
 
-    
     {% endfor %}
   </div>
 </div>

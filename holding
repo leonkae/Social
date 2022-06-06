@@ -111,3 +111,10 @@ content
             </div>
           </div>
         </div>
+
+        <!-- necessary -->
+          <h1>my post</h1>
+  {% for image in images %}
+  {{image.caption}}
+  <img src="{{image.image.url }}" alt="">
+  {% endfor %}

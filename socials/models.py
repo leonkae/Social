@@ -41,6 +41,12 @@ class Post(models.Model):
      def get_images(cls):
         images = cls.objects.all()
         return images
+     
+     @classmethod
+     def filter_by_profile(cls,profile):
+            images =cls.objects.filter(profile__id__icontains=profile).all()
+            return images
+            
    
      def __str__(self):
         return f'{self.profile.user.username} Post'
