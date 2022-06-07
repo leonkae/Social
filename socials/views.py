@@ -115,7 +115,22 @@ def LikeView(request,pk):
         return HttpResponseRedirect(reverse('home'))
     return redirect('home')
 
+def follow(request,pk):
+    '''follow view'''
+    if request.method =='POST':
+        to_follow = get_object_or_404(Profile,user__pk=pk)
+        follower = get_object_or_404(Profile, user__pk=request.user.pk)
+        to_follow.followers.add(request.user)
+        follower.following.add(to_follow.user)
+        to_follow.save()
+        follower.save()
 
+
+        return HttpResponseRedirect(reverse('home'))
+    return redirect('home')
+
+    
+    
 @login_required(login_url='login')    
 def Comment(request, pk):
     '''comment view'''

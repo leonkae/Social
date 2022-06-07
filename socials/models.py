@@ -9,8 +9,8 @@ class Profile(models.Model):
     bio = models.TextField(max_length=255)
     prophoto = models.ImageField(upload_to='profile/',default ='image.jpg')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile')
-    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following', null=True) 
-    followers = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followers', null=True)
+    following = models.ManyToManyField(User, related_name='following') 
+    followers = models.ManyToManyField(User, related_name='folllowers')
    
     def __str__(self):
        return self.user.username

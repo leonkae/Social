@@ -209,8 +209,17 @@
               alt="..."
             />| {{image.profile.user.username}}
             <span class="img-title">{{image.imagename}}</span>
+            <span class="follow">
+              <form method="POST" action="{% url 'follow' image.profile.user.pk  %}">
+                {% csrf_token %}
+                <button type="submit" , name="post_id" , value="{{ post.id }}">
+                  follow
+                </button>
+              </form></span
+            >
           </h4>
         </div>
+        <div class="follow"></div>
 
         <img src="{{ image.image.url }}" class="card-img-top" alt="..." />
 
@@ -290,7 +299,7 @@
               <br />
             </p>
             <div class="comment-field">
-              <h6>comments : </h6>
+              <h6>comments :</h6>
               {% for comment in image.comments.all|slice:'2'%}
               <span><p>{{comment.text}}</p></span>
               {% endfor %}

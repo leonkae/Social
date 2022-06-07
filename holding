@@ -121,4 +121,5 @@ content
 
 
   <!-- important -->
- 
+ <span> following: {{user_profile.following.all.count}}</span>
+  <span> followers: {{user_profile.followers.all.count}}</span>

@@ -13,5 +13,6 @@ urlpatterns = [
     path('photo/<str:pk>/', views.viewPhoto,name='photo'),
     path('like/<int:pk>', views.LikeView, name='likeview'),
     path('comment/<str:pk>/',views.Comment, name='comment'),
+    path('follow/<int:pk>, ',views.follow,name='follow'),
    
 ]

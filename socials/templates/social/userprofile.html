@@ -54,6 +54,12 @@
     font-family: "Poppins", sans-serif;
     font-weight: lighter;
   }
+  .follow-count {
+    text-align: center;
+    margin-top: 2vh;
+    font-family: "Poppins", sans-serif;
+    font-weight: lighter;
+  }
 
   .card-nav a {
     text-decoration: none;
@@ -214,8 +220,15 @@
     <h2>User Profile</h2>
   </div>
 
+  <div class="follow-count">
+    <h2>
+      <span> Following | {{user_profile.following.all.count}}</span> |
+      <span> Followers | {{user_profile.followers.all.count}}</span>
+    </h2>
+  </div>
+
   <div class="row">
-    <div class="card mx-auto" style="width: 45rem;">
+    <div class="card mx-auto" style="width: 45rem">
       <p class="card-text m-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -242,7 +255,7 @@
       </div>
     </div>
   </div>
-    <div class="profile-info" style="margin-top: 2vh">
+  <div class="profile-info" style="margin-top: 2vh">
     <h2>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -261,17 +274,14 @@
         <polyline points="21 15 16 10 5 21"></polyline>
       </svg>
       | My posts
-        <span style="font-weight: bolder"></span> |
-              {{image_length}}
-            </p>
+      <span style="font-weight: bolder"></span> | {{image_length}}
     </h2>
   </div>
 
-  
- {% for image in images %}
+  {% for image in images %}
   <div class="row">
     <div class="col-s-6 col-md-4">
-      <div class="card" style="width: 30rem; ">
+      <div class="card" style="width: 30rem">
         <div class="card-body">
           <h5 class="card-title">{{image.imagename}}</h5>
         </div>
