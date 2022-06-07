@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import *
+from .models import Comment as CommentModel
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 # Create your views here.
@@ -116,16 +117,22 @@ def LikeView(request,pk):
 
 
 @login_required(login_url='login')    
-def Comment(request):
+def Comment(request, pk):
     '''comment view'''
-    current_user = request.user
-    user_profile = get_object_or_404(Profile, user=current_user)
     
-    if request == 'POST':
+    if request.method == 'POST':
         data=request.POST
-        comment =request.FILES.get('comment')
-        print('data',data)
-        print('comment',comment)
+  
+        post = Post.objects.get(pk=pk)
+        new_comment = CommentModel.objects.create(
+            user =request.user,
+            text=request.POST['comment'],
+            user_post = post
+        )
+        post.comments.add(new_comment)
+        post.save()
+        return redirect('home')
+        
         
     return render(request, 'social/comment.html')     
 

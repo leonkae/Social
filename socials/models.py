@@ -21,6 +21,7 @@ class Comment(models.Model):
     text = models.TextField(max_length=100) 
     created = models.DateTimeField(auto_now_add=True)
     modified =models.DateTimeField(auto_now=True) 
+    user_post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name='user_comments')
     
     def __str__(self):
         return f'{self.user.username} Post'  
@@ -28,7 +29,7 @@ class Comment(models.Model):
 class Post(models.Model):
      '''image(post) model'''
      
-     image = models.ImageField(upload_to='posts/',default='')
+     image = models.ImageField(upload_to='media/',default='')
      imagename = models.CharField(max_length=20)
      caption = models.TextField(max_length=255)
      profile = models.ForeignKey(Profile, on_delete =models.CASCADE)
