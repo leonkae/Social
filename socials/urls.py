@@ -11,5 +11,7 @@ urlpatterns = [
     path('addprofile/',views.addprofile, name='addprofile'),
     path('userprofile/',views.profile, name='userprofile'),
     path('photo/<str:pk>/', views.viewPhoto,name='photo'),
-    path('like/<int:pk>', views.LikeView, name='likeview')
+    path('like/<int:pk>', views.LikeView, name='likeview'),
+    path('comment',views.Comment, name='comment'),
+   
 ]
