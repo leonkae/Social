@@ -121,5 +121,35 @@ content
 
 
   <!-- important -->
- <span> following: {{user_profile.following.all.count}}</span>
-  <span> followers: {{user_profile.followers.all.count}}</span>
+   {% for image in images %}
+  <div class="row">
+      <div class="card" style="width: 30rem">
+        <div class="card-body">
+          <h5 class="card-title">{{image.imagename}}</h5>
+        </div>
+        <img src="{{image.image.url}}" class="card-img-top" alt="..." />
+        <p class="card-text">{{image.caption}}</p>
+        <p class="card-text">{{image.profile.user.username}}</p>
+        <div class="card-nav m-2">
+          <a href="{% url 'photo' image.id  %}" class="">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-eye"
+            >
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </a>
+        </div>
+      </div>
+  </div>
+  {% endfor %}
+</div>

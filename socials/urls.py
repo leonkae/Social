@@ -14,5 +14,6 @@ urlpatterns = [
     path('like/<int:pk>', views.LikeView, name='likeview'),
     path('comment/<str:pk>/',views.Comment, name='comment'),
     path('follow/<int:pk>, ',views.follow,name='follow'),
+    path('search/',views.search_results,name='search_results'),
    
 ]

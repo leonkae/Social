@@ -1,14 +1,15 @@
 {% extends 'social/base.html' %} {% block content %}
-
-<!-- navbar -->
 <style>
   .title {
-    margin-top: 70px;
+    margin-top: 130px;
   }
   h1 {
     font-family: "Grand Hotel", cursive;
     font-size: 70px;
     color: dodgerblue;
+  }
+  .img-title {
+    font-family: "Grand Hotel", cursive;
   }
   .user-name {
     font-size: large;
@@ -17,11 +18,7 @@
     text-decoration: none;
     color: black;
   }
-  .submit {
-    background: none;
-    border: none;
-  }
-  .home a {
+  .create a {
     text-decoration: none;
     color: black;
   }
@@ -33,53 +30,34 @@
     text-decoration: none;
     color: black;
   }
-  .card {
-    margin-top: 30px;
-  }
-  .bio {
-    font-weight: bolder;
-    font-size: x-large;
-  }
-  .card-text {
-    font-size: x-large;
-  }
-  .info-wrapper {
-    text-align: center;
-    font-size: x-large;
-    font-family: "Poppins", sans-serif;
-  }
-  .profile-info {
-    text-align: center;
-    margin-top: 2vh;
-    font-family: "Poppins", sans-serif;
-    font-weight: lighter;
-  }
-  .follow-count {
-    text-align: center;
-    margin-top: 2vh;
-    font-family: "Poppins", sans-serif;
-    font-weight: lighter;
-    font-size: smaller;
-  }
-
-  .card-body a {
+  .home a {
     text-decoration: none;
     color: black;
   }
-
+  .card-nav a {
+    text-decoration: none;
+    color: black;
+  }
+  .btn {
+    border: none;
+    text-align: center;
+  }
   .user-name img {
     height: 35px;
     width: 35px;
     border-radius: 50%;
     border: 2px solid dodgerblue;
   }
-
-  .card-text1 {
+  .user-name {
+    font-family: "Poppins", sans-serif;
+  }
+  .card-text{
     font-family: "Grand Hotel", cursive;
     color: dodgerblue;
     font-size: larger;
   }
 </style>
+
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg bg-light mb-5 fixed-top">
   <!-- conatainer -->
@@ -117,7 +95,6 @@
         </li>
       </ul>
 
-      <!-- search form functions -->
       <div class="home me-3">
         <a href="{% url 'home' %}"
           ><svg
@@ -201,132 +178,44 @@
     </div>
   </div>
 </nav>
-<a href="{% url 'home' %}"
-  ><svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    class="feather feather-arrow-left"
-  >
-    <line x1="19" y1="12" x2="5" y2="12"></line>
-    <polyline points="12 19 5 12 12 5"></polyline></svg
-></a>
 
-<div class="title">
-  <h1 style="text-align: center">Social</h1>
-</div>
-
-<div class="container">
-  <div class="info-wrapper">
-    <h2>User Profile</h2>
+<div class="con-wrapper-fluid">
+  <div class="title">
+    <h1 style="text-align: center">Social</h1>
   </div>
 
-  <div class="follow-count">
-    <h2 style="font-size:large;">
-      <span>Following| {{user_profile.following.all.count}}</span> |
-      <span>Followers| {{user_profile.followers.all.count}}</span>
-    </h2>
-  </div>
-
-  <div class="row">
-    <div class="card mx-auto" style="width: 45rem">
-      <p class="card-text m-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="feather feather-user"
-        >
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
-        | {{user_profile.user.username}}
-      </p>
-      <img src="{{user_profile.prophoto.url}}" class="card-img-top" alt="..." />
-      <div class="card-body">
-        <p class="card-text">
-          <span class="bio">Bio:</span> {{user_profile.bio}}
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="profile-info" style="margin-top: 2vh">
-    <h2>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="feather feather-image"
-      >
-        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-        <circle cx="8.5" cy="8.5" r="1.5"></circle>
-        <polyline points="21 15 16 10 5 21"></polyline>
-      </svg>
-      | My posts
-      <span style="font-weight: bolder"></span> | {{image_length}}
-    </h2>
-  </div>
-
+  <!-- container  -->
   <div class="container">
+    <!-- actual search actions -->
     <div class="row">
-      {% for image in images %}
-      <div class="col-s-6 col-md-4">
+      {% if searched_object %}
+      <h2>found {{searched_object|length}} of searched {{message}}</h2>
+      {% else %}
+      <h2>{{message}}</h2>
+      {% endif %}
+    </div>
+    <!-- after search displayed -->
+    <div>
+      <div class="row">
+        {% for image in searched_object %}
         <div class="card my-2">
-          <p class="card-text1 m-2">{{image.imagename}}</p>
-          <img src="{{image.image.url}}" alt="..." />
-          <div class="card-body">
-            <p class="card-text">{{image.caption}}</p>
-            <p>
-              <span style="font-weight: bolder">likes:</span>
-              {{image.likes.all.count}}
-            </p>
-            {% for comment in image.comments.all|slice:'2'%}
-            <p>
-              <span style="font-weight: bolder">Comments:</span
-              ><span>{{comment.text}}</span>
-            </p>
-            {% endfor %}
-            <a href="{% url 'photo' image.id  %}" class="">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-eye"
-              >
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-            </a>
-          </div>
+          <p class="card-text">{{image.imagename}}</p>
+          <img
+            src="{{ image.image.url }}"
+            class="image-thumbnail"
+            alt="Card image cap"
+          />
+          <p class="m-2">
+            <span style="font-weight: bolder">likes</span>
+            {{image.likes.all.count}}
+          </p>
+          {% for comment in image.comments.all|slice:'2'%}
+          <p class="m-2"><span style="font-weight: bolder;" >Comments:</span><span>{{comment.text}}</span></p>
+          {% endfor %}
         </div>
+        {% endfor %}
       </div>
-      {% endfor %}
+      {% endblock %}
     </div>
   </div>
-
-  {% endblock %}
 </div>

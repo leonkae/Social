@@ -157,6 +157,20 @@ def viewPhoto(request,pk):
     return render(request,'social/photo.html',{'images':images})
 
 
+def search_results(request):
+    '''search function'''
+   
+    if request.method == "POST":
+        searched = request.POST['searched']
+        searched_object = Post.objects.filter(profile__user__username__icontains=searched)
+        
+        
+        
+        return render(request,'social/search.html',{'searched_object':searched_object })
+    
+    
+    
+
 def logout_user(request):
     '''logout view '''
     logout(request)
