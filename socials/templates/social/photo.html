@@ -175,7 +175,10 @@
 </div>
 <div class="container">
   <div class="card">
+    {% if image.image %}
     <img src="{{images.image.url}}" class="card-img-top" alt="..." />
+    {% endif %}
+
     <div class="card-body">
       <p class="card-text">
         <span class="bio">Caption:</span> {{images.caption}}
