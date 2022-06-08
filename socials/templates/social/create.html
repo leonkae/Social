@@ -172,12 +172,12 @@
           {% csrf_token %}
           <div class="form-group m-4">
             <label>Caption</label>
-            <input name="caption" type="text" class="form-control" />
+            <input name="caption" type="text" class="form-control" required />
           </div>
 
           <div class="form-group m-4">
             <label>Image name</label>
-            <input name="imagename" type="text" class="form-control" />
+            <input name="imagename" type="text" class="form-control" required />
           </div>
 
           <div class="form-group m-4">
@@ -187,6 +187,7 @@
               type="file"
               class="form-control-file"
               id="example"
+              required
             />
           </div>
 

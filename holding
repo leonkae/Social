@@ -1,0 +1,155 @@
+<form method="POST" action="">
+  {% csrf_token %}
+  {{ form.username.label }}
+  {{ form.username }}
+
+  {{ form.email.label }}
+  {{ form.email }}
+
+  {{ form.password1.label }}
+  {{ form.password1 }}
+
+  {{ form.password2.label }}
+  {{ form.password2 }}
+
+  <input type="submit" name="Create User" />
+</form>
+
+<!-- home info  -->
+
+
+
+<div class="container">
+  <h1>this is home</h1>
+  <p>{{ request.user }}</p>
+  <button>
+    <a href="{% url 'logout' %}">logout</a>
+  </button>
+</div>
+
+
+<!-- back button -->
+<a href="{% url 'home' %}"
+  ><svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="feather feather-arrow-left"
+  >
+    <line x1="19" y1="12" x2="5" y2="12"></line>
+    <polyline points="12 19 5 12 12 5"></polyline></svg
+></a>
+
+<!-- neccesary requiremnts -->
+
+image model:
+Image,
+Image Name.,
+Image Caption.,
+Profile Foreign key,
+Likes,
+Comments,
+methods(image)-and tests 
+save_image
+delete_image
+update_caption
+
+profile model:
+Profile Photo
+Bio
+
+methods(profile)-and tests 
+save_profile
+delete_profile
+update_profile
+
+Search Functionality
+image Details
+Auth
+
+<!-- user profile  -->
+<h1>this is your profile</h1>
+<p></p>
+<img src="{{user_profile.prophoto.url}}" alt="" />
+
+content 
+
+ <img src="{{images.image.url}}" alt="" />
+
+ <!-- home -->
+      <div class="card" style="width: 32rem">
+          <img src="{{ image.image.url }}" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">{{image.imagename}}</h5>
+            <p class="card-text">
+              {{image.profile.user.username}}:{{image.caption}}
+            </p>
+            <div class="card-nav">
+              <a href="{% url 'photo' image.id  %}" class="">
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-eye"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle></svg
+            >
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- necessary -->
+          <h1>my post</h1>
+  {% for image in images %}
+  {{image.caption}}
+  <img src="{{image.image.url }}" alt="">
+  {% endfor %}
+
+
+  <!-- important -->
+   {% for image in images %}
+  <div class="row">
+      <div class="card" style="width: 30rem">
+        <div class="card-body">
+          <h5 class="card-title">{{image.imagename}}</h5>
+        </div>
+        <img src="{{image.image.url}}" class="card-img-top" alt="..." />
+        <p class="card-text">{{image.caption}}</p>
+        <p class="card-text">{{image.profile.user.username}}</p>
+        <div class="card-nav m-2">
+          <a href="{% url 'photo' image.id  %}" class="">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-eye"
+            >
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </a>
+        </div>
+      </div>
+  </div>
+  {% endfor %}
+</div>
