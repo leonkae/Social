@@ -200,11 +200,13 @@
         {% for image in searched_object %}
         <div class="card my-2">
           <p class="card-text">{{image.imagename}}</p>
+          {% if image.image %}
           <img
             src="{{ image.image.url }}"
             class="image-thumbnail"
             alt="Card image cap"
           />
+          {% endif %}
           <p class="m-2">
             <span style="font-weight: bolder">likes</span>
             {{image.likes.all.count}}
