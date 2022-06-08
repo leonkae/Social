@@ -291,7 +291,11 @@
       <div class="col-s-6 col-md-4">
         <div class="card my-2">
           <p class="card-text1 m-2">{{image.imagename}}</p>
+
+          {% if image.image %}
           <img src="{{image.image.url}}" alt="..." />
+          {% endif %}
+          
           <div class="card-body">
             <p class="card-text">{{image.caption}}</p>
             <p>
