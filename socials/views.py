@@ -105,6 +105,7 @@ def create_post(request):
     
     return render(request, 'social/create.html' )
 
+@login_required(login_url='login')    
 def LikeView(request,pk):
     '''like view'''
     if request.method =='POST':
@@ -115,6 +116,7 @@ def LikeView(request,pk):
         return HttpResponseRedirect(reverse('home'))
     return redirect('home')
 
+@login_required(login_url='login')    
 def follow(request,pk):
     '''follow view'''
     if request.method =='POST':
@@ -149,14 +151,17 @@ def Comment(request, pk):
         return redirect('home')
         
         
-    return render(request, 'social/comment.html')     
-
+    return render(request, 'social/comment.html') 
+    
+@login_required(login_url='login')    
 def viewPhoto(request,pk):
     '''viewphoto view'''
     images = Post.objects.get(id=pk)
     return render(request,'social/photo.html',{'images':images})
 
 
+
+@login_required(login_url='login')    
 def search_results(request):
     '''search function'''
    
