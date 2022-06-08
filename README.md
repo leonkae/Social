@@ -4,7 +4,7 @@
 * Andre Leon Kaeulana
 
 # Description
-THis sis a photo sharing app, that allows a user to create a profile that is updatable, to see other posts(socials) from other users, and post their own posts.
+This is a photo sharing app, that allows a user to create a profile that is updatable, to see other posts(socials) from other users, and post their own posts.
 
 # Set Up and Description
 
