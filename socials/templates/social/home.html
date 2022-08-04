@@ -345,16 +345,20 @@
               : {{image.caption}}
               <br />
             </p>
+            
             <div class="comment-field">
               <h6>comments :</h6>
               {% for comment in image.comments.all|slice:'2'%}
               <span><p>{{comment.text}}</p></span>
               {% endfor %}
             </div>
+
+
           </div>
           <div class="date-time">
             <small>{{image.created|timesince}}</small>
           </div>
+          
         </div>
       </div>
     </div>
